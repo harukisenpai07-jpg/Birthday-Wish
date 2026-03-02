@@ -83,9 +83,8 @@ body {
 }
 
 .hidden {
-    display: none !important;
-    opacity: 0;
-    pointer-events: none;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 /* --- Cake & Small Candles --- */
@@ -98,68 +97,55 @@ body {
     margin-bottom: 5vh;
 }
 
-/* Heart dimensions via pseudo elements */
-.heart-cake {
-    position: relative;
-    width: 280px;
-    height: 280px;
-    background: #f8b4b4;
-    /* soft pink */
-    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.3));
-    transform: rotate(-45deg);
-    border-radius: 5px;
-    /* slight rounding of the peak */
+.cake-wrapper {
+    margin-bottom: 5vh;
+    filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.2)) drop-shadow(0px 5px 10px rgba(220, 20, 60, 0.15));
 }
 
-/* Pseudo elements for the top rounds of the heart */
-.heart-cake::before,
+/* Base Heart Shape */
+.heart-cake {
+    position: relative;
+    width: 380px;
+    height: 380px;
+    background: #fbb6ca;
+    /* Soft light pink from reference */
+    clip-path: path("M 190 350 C 190 350, 10 200, 10 110 C 10 40, 70 10, 130 10 C 165 10, 190 35, 190 35 C 190 35, 215 10, 250 10 C 310 10, 370 40, 370 110 C 370 200, 190 350, 190 350 Z");
+}
+
+/* Beautiful white piping along the entire edge */
 .heart-cake::after {
     content: '';
     position: absolute;
-    width: 280px;
-    height: 280px;
-    background: #f8b4b4;
-    border-radius: 50%;
+    top: 5px;
+    left: 5px;
+    width: 370px;
+    height: 370px;
+    clip-path: path("M 185 340 C 185 340, 15 195, 15 105 C 15 45, 70 15, 125 15 C 155 15, 185 45, 185 45 C 185 45, 215 15, 245 15 C 300 15, 355 45, 355 105 C 355 195, 185 340, 185 340 Z");
+    border: 10px dotted #ffffff;
+    /* Simulates piped frosting dollops */
+    opacity: 0.95;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
 }
 
-.heart-cake::before {
-    top: -140px;
-    left: 0;
-}
-
-.heart-cake::after {
-    top: 0;
-    left: 140px;
-}
-
-/* Adding depth to the base of the heart via box-shadow on pseudo elements */
-.heart-cake::before,
-.heart-cake::after {
-    box-shadow: inset 10px 10px 20px rgba(255, 255, 255, 0.4), inset -10px -10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.heart-cake {
-    box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Happy Birthday text matching the cake */
+/* Happy Birthday text from reference image */
 .cake-text {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
-    transform: translate(-50%, -50%) rotate(45deg);
-    /* un-rotate from heart */
-    z-index: 10;
+    transform: translate(-50%, -50%);
+    z-index: 30;
     text-align: center;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 1.8rem;
-    color: #fffaf0;
-    /* piped icing color */
-    line-height: 1.2;
-    letter-spacing: 2px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2), -1px -1px 2px rgba(255, 255, 255, 0.8);
-    width: 200px;
+    font-family: 'Playfair Display', serif;
+    /* Or a cursive script if available */
+    font-style: italic;
+    font-weight: 500;
+    font-size: 2.5rem;
+    color: #ffffff;
+    /* White icing text */
+    line-height: 1.4;
+    letter-spacing: 1px;
+    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.15);
+    width: 320px;
 }
 
 .cake-text .heart-icon {
@@ -172,37 +158,53 @@ body {
 
 .small-candles-container {
     position: absolute;
-    /* absolute relative to heart container */
     top: 0;
     left: 0;
-    width: 280px;
-    height: 280px;
-    z-index: 20;
+    width: 380px;
+    height: 380px;
+    z-index: 40;
     pointer-events: none;
 }
 
 .small-cake-candle {
     position: absolute;
-    width: 14px;
-    height: 60px;
-    background: linear-gradient(to right, #ffffff, #eeeeee);
-    border-radius: 4px 4px 0 0;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    width: 12px;
+    height: 40px;
+    background: repeating-linear-gradient(45deg, #ffffff, #ffffff 4px, #ffb6c1 4px, #ffb6c1 8px);
+    border-radius: 3px 3px 0 0;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+    /* Tiny shadows to pin them to the cake */
 }
 
-/* Left candle on the left curve */
-.small-cake-candle.left {
-    top: -50px;
-    left: 0px;
-    transform: rotate(45deg);
+/* Position the 5 candles along the top curve */
+.small-cake-candle.c1 {
+    top: 90px;
+    left: 55px;
+    transform: rotate(-15deg);
 }
 
-/* Right candle on the right curve */
-.small-cake-candle.right {
-    top: 230px;
-    left: 280px;
-    transform: rotate(45deg);
-    /* un-rotate */
+.small-cake-candle.c2 {
+    top: 50px;
+    left: 120px;
+    transform: rotate(-5deg);
+}
+
+.small-cake-candle.c3 {
+    top: 60px;
+    left: 184px;
+}
+
+/* Center top cleft */
+.small-cake-candle.c4 {
+    top: 50px;
+    right: 120px;
+    transform: rotate(5deg);
+}
+
+.small-cake-candle.c5 {
+    top: 90px;
+    right: 55px;
+    transform: rotate(15deg);
 }
 
 .wick {
@@ -342,11 +344,12 @@ body {
     left: 50%;
     transform: translateX(-50%);
     width: 400px;
-    height: 300px;
+    height: 380px;
+    /* Force height so child elements render */
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    perspective: 1000px;
+    /* Optional: Adding perspective to the main scene layer instead, or ensuring elements aren't clipped */
 }
 
 .gift-box.flat-pink {

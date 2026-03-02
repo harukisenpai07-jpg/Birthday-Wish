@@ -148,15 +148,16 @@ blowBtn.addEventListener('click', () => {
   });
 
   // 5. Open gift lid
-  tl.to('.gift-lid', {
+  tl.to('.box-lid', {
     y: -60,
-    rotation: 12,
+    rotationX: 30, // Change rotation to 3D since box is 3D
+    rotationZ: 10,
     duration: 0.8,
     ease: "power2.out"
   }, "+=0.3");
 
   // Move lid away and adjust gift body
-  tl.to('.gift-lid', {
+  tl.to('.box-lid', {
     y: 200,
     opacity: 0,
     duration: 1,
